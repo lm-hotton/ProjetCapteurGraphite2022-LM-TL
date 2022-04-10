@@ -1,9 +1,19 @@
 # ProjetCapteurGraphite2022-LM-TL
 ***
-## Description du projet et objectifs
-***
-Cette UF est basée sur les travaux de chercheurs dans le domaine des capteurs afin d’évaluer les potentialités de leur technologie low-tech. Cette année, le capteur étudié est un [capteur de déformation à base de graphite](https://www.researchgate.net/publication/259846610_Pencil_Drawn_Strain_Gauges_and_Chemiresistors_on_Paper).
+## Sommaire
+1. [Description du projet, objectifs et livrables]
+2. [PCB Shield]
+3. [Code Arduino]
+4. [APK Arduino]
+5. [Banc de test
+6. [Datasheet] 
+7. [Solutions d'amélioration]
+## 1. Description du projet, objectifs et livrables
+### 1.1. Description du projet et objectifs
+Cette UF est basée sur les travaux de chercheurs dans le domaine des capteurs afin d’évaluer les potentialités de leur technologie low-tech. Cette année, le capteur étudié est un [capteur de déformation à base de graphite](https://www.researchgate.net/publication/259846610_Pencil_Drawn_Strain_Gauges_and_Chemiresistors_on_Paper). 
 
+### 1.2. Livrables
+Pour réaliser ce projet
 Nous avons réalisé le capteur graphite, un shield PCB associé à une carte Arduino UNO comprenant:
 - un amplificateur de transimpédance
 - un module bluetooth
@@ -20,16 +30,14 @@ Nous avons également créé un APK Android permettant d'afficher la valeur de l
 
 Enfin nous avons conçu un banc de test de notre capteur pour rédiger sa datasheet et pouvoir proposer des solutions de d'améliorations et les limites pour ce type de capteur.
 ***
-## Liste des livrables
+## 2. PCB shield 
 ***
-## PCB shield 
+## 3. Code Arduino
 ***
-## Code Arduino
+## 4. APK Android
 ***
-## APK Android
+## 5. Banc de test
 ***
-## Banc de test
+## 6. Datasheet
 ***
-## Datasheet
-***
-## Solutions d'amélioration
+## 7. Solutions d'amélioration
