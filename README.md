@@ -1,8 +1,8 @@
 # ProjetCapteurGraphite2022-LM-TL
 ***
-## Description
+## Description du projet et objectifs
 ***
-Cette UF est basée sur les travaux de chercheurs dans le domaine des capteurs afin d’évaluer les potentialités de leur technologie low-tech. Cette année, le capteur étudié est un capteur de déformation à base de graphite.
+Cette UF est basée sur les travaux de chercheurs dans le domaine des capteurs afin d’évaluer les potentialités de leur technologie low-tech. Cette année, le capteur étudié est un [capteur de déformation à base de graphite](https://www.researchgate.net/publication/259846610_Pencil_Drawn_Strain_Gauges_and_Chemiresistors_on_Paper).
 
 Nous avons réalisé le capteur graphite, un shield PCB associé à une carte Arduino UNO comprenant:
 - un amplificateur de transimpédance
