@@ -112,11 +112,18 @@ Nous décidons de filtrer dans 3 régions de la chaîne de traitement analogique
 Nous allons maintenant tester ce circuit à l'aide du logiciel d'électronique analogique LTSpice.
 
 ### 3.2. Test circuit électrique sur LTSpice
+
+
+
 ### 3.3. Réalisation d'un PCB (KiCad)
 ### 3.4. Fabrication du PCB
 
 ***
 ## 4. Code Arduino
+Voici le code arduino qui permet de 
+```
+mettre le code arduino
+```
 ***
 ## 5. APK Android
 ***
@@ -125,3 +132,4 @@ Nous allons maintenant tester ce circuit à l'aide du logiciel d'électronique a
 ## 7. Datasheet
 ***
 ## 8. Solutions d'amélioration
+***
