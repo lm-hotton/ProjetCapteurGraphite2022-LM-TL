@@ -70,7 +70,7 @@ Or notre microcontroleur Arduino Uno possède les caractéristiques suivantes:
 
 La mesure directe d'un courant aussi faible que celui que fourni notre capteur ne parait pas possible.
 
-![Solution minimaliste : amplificateur transimpédance](/Users/louis-maxencehotton/Desktop/ProjetCapteurGraphite2022-LM-TL/PhotoREADME/circuit1.png)
+![Solution minimaliste : amplificateur transimpédance](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/circuit1.png)
 
 ### 3.2. Test circuit électrique sur LTSpice
 ### 3.3. Réalisation d'un PCB (KiCad)
