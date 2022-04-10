@@ -1,13 +1,13 @@
 # ProjetCapteurGraphite2022-LM-TL
 ***
 ## Sommaire
-1. [Description du projet, objectifs et livrables]
-2. [PCB Shield]
-3. [Code Arduino]
-4. [APK Arduino]
-5. [Banc de test
-6. [Datasheet] 
-7. [Solutions d'amélioration]
+1. [Description du projet, objectifs et livrables](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/tree/LM#1-description-du-projet-objectifs-et-livrables)
+2. [PCB Shield](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/tree/LM#2-pcb-shield)
+3. [Code Arduino](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/tree/LM#3-code-arduino)
+4. [APK Arduino](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/tree/LM#4-apk-android)
+5. [Banc de test](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/tree/LM#5-banc-de-test)
+6. [Datasheet](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/tree/LM#6-datasheet)
+7. [Solutions d'amélioration](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/tree/LM#7-solutions-dam%C3%A9lioration)
 ## 1. Description du projet, objectifs et livrables
 ### 1.1. Description du projet et objectifs
 Cette UF est basée sur les travaux de chercheurs dans le domaine des capteurs afin d’évaluer les potentialités de leur technologie low-tech. Cette année, le capteur étudié est un [capteur de déformation à base de graphite](https://www.researchgate.net/publication/259846610_Pencil_Drawn_Strain_Gauges_and_Chemiresistors_on_Paper). 
