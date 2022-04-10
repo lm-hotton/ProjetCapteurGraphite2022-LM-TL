@@ -4,10 +4,12 @@
 1. [Description du projet, objectifs et livrables](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/tree/LM#1-description-du-projet-objectifs-et-livrables)
 2. [Jauge de Déformation à base de graphite](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/tree/LM#2-jauge-de-d%C3%A9formation-%C3%A0-base-de-graphite)
 3. [PCB Shield](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/tree/LM#3-pcb-shield)
-3.1. Choix du circuit amplificateur transimpédance
-3.2. Test circuit électrique sur LTSpice
-3.3. Réalisation d'un PCB (KiCad)
-3.4. Fabrication du PCB
+- 3.1. Choix du circuit amplificateur transimpédance
+- 3.2. Test circuit électrique sur LTSpice
+- 3.3. Réalisation d'un PCB (KiCad)
+- 3.4. Fabrication du SHIELD
+- 3.4.1. Fabrication du PCB
+- 3.4.2. Perçage et soudure
 4. [Code Arduino](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/tree/LM#4-code-arduino)
 5. [APK Arduino](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/tree/LM#5-apk-android)
 6. [Banc de test](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/tree/LM#6-banc-de-test)
@@ -116,8 +118,19 @@ Nous allons maintenant tester ce circuit à l'aide du logiciel d'électronique a
 
 
 ### 3.3. Réalisation d'un PCB (KiCad)
-### 3.4. Fabrication du PCB
+### 3.4. Fabrication du SHIELD
+#### 3.4.1. Fabrication du PCB
+Nous avons ensuite pu fabriquer le PCB sur une plaquette d'epoxy recouverte d'une fine couche de cuivre (environ 60µm).
+Tout d'abord, nous avons imprimé notre modélisation du PCB sur du papier calque, puis, une insolation aux UV pendant 2 minutes a permis de transposer cette "silhouette" sur notre couche d'epoxy, permettant ainsi de déposer une résine protectrice, qui grâce à un révélateur, a pu être retirée aux endroits désirés.
+Ensuite, la plaquette a été déposée dans un bain de perchlorure de fer afin d'être gravée (environ 8 minutes). A la suite de cela, le cuivre non protégé par la résine a alors été retiré, permettant d'obtenir le PCB modélisé en amont.
+Pour finir, de l'acétone a été appliquée sur la plaquette pour éliminer les dernières traces de résine.
 
+## 3.4.2. Perçage et soudure
+Une fois le PCB réalisé, nous sommes passés au perçage de trous sur notre plaquette à l'aide d'une perçeuse électrique afin d'insérer nos composants :
+
+0.8mm de diamètre pour l'AOP, les résistances et les capacités
+1mm de diamètre pour les connecteurs de l'Arduino et des headers des différents modules (pinces du capteur, bluetooth, encodeur rotatoire, écran OLED)
+Enfin, nous avons soudé chaque composant à l'aide d'un fer à souder.
 ***
 ## 4. Code Arduino
 Voici le code arduino qui permet de 
