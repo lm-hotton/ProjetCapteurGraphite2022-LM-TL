@@ -70,7 +70,46 @@ Or notre microcontroleur Arduino Uno possède les caractéristiques suivantes:
 
 La mesure directe d'un courant aussi faible que celui que fourni notre capteur ne parait pas possible.
 
+Nous choisissons d'utiliser la solution d'un amplificateur transimpédance:
 ![Solution minimaliste : amplificateur transimpédance](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/circuit1.png)
+Cette solution permet de :
+- conversion I->U dans la résistance d'épreuve R1 (shunt)
+- amplification à fort gain par montage non-inverseur
+- la chute de tension sur R1 perturbe (un peu) la tension appliquée au capteur
+- peut fonctionner avec seulement une alimentation positive (nécessaire avec l'utilisation d'un microcontroleur Arduino Uno)
+
+Nous devons donc choisir un amplificateur possèdant les caractéristiques suivantes :
+- faible courant d'entrée
+- ultra-faible offset de tension
+- supporte mode commun à la tension d'alim négative ("low rail") 
+
+L'ampli LTC1050C satisfait toutes ces contraintes.
+
+**Filtrage:**
+
+Un montage aussi sensible étant vulnérable au bruit à 50Hz (+ harmoniques) résultant du
+couplage capacitif avec le réseau 230V, un **filtrage passe-bas est indispensable**.
+D'autres sources de bruit à filtrer sont les horloges de circuits digitaux (microcontrôleur,
+afficheurs, etc...) et les transceivers RF (bluetooth, etc...).
+Ce filtrage peut être effectué en partie du coté digital, par programme, sur le microcontrôleur.
+Cependant un **filtrage analogique est indispensable**, en effet un excès de bruit à l'entrée de
+l'ADC pourrait amener celui-ci à saturation. 
+
+Nous décidons de filtrer dans 3 régions de la chaîne de traitement analogique :
+- **filtre passif à l'entrée** : permet d'éviter que les bruits HF causent de la distorsion dans les étages d'entrée
+- **filtre actif basé sur les amplificateurs opérationnels** : maximum d'efficacité
+- **filtre passif en fin de chaine**, coté ADC, pour retirer le bruit introduit en cours de traitement (bruit d'alimentation, bruit d'horloge des amplificateurs à découpage)
+
+![Solution minimaliste : amplificateur transimpédance avec filtre](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/circuit2.png)
+
+- R5 en entrée protège l'ampli opérationnel contre les décharges électrostatiques, en forme avec C1 un filtre pour les bruits en tension
+- C1 avec R1 forme un filtre pour le bruit en courant
+- R2 sera interchangeable, pour permettre une adaptation du calibre
+- C4 avec R3 forme un filtre actif
+- C2 avec R6 forme le filtre de sortie
+- C3 filtre le bruit d'alimentation 
+
+Nous allons maintenant tester ce circuit à l'aide du logiciel d'électronique analogique LTSpice.
 
 ### 3.2. Test circuit électrique sur LTSpice
 ### 3.3. Réalisation d'un PCB (KiCad)
