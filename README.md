@@ -25,7 +25,7 @@ Cette UF est basée sur les travaux de chercheurs dans le domaine des capteurs a
 ### 1.2. Livrables
 Pour réaliser ce projet
 Nous avons réalisé le capteur graphite, un **shield PCB** associé à une carte Arduino UNO comprenant:
-- **un amplificateur de transimpédance**
+- **un amplificateur transimpédance**
 - **un module bluetooth**
 - un écran OLED
 - un encodeur rotatif
@@ -33,7 +33,7 @@ Nous avons réalisé le capteur graphite, un **shield PCB** associé à une cart
 Nous avons créer le **code Arduino** permettant de gérer:
 - la mesure du capteur de déformation à base de graphite
 - le module bluetooth
-- l'affichage de l'écran OLED
+- l'affichage de l'écran OLED avec un menu
 - l'encodeur rotatif pour naviguer sur l'OLED
 
 Nous avons également créé un **APK Android** permettant d'afficher la valeur de la résistance mesurée grâce à notre shield PCB avec lequel on communique grâce au module bluetooth et au microcontrolleur Arduino UNO.
@@ -89,20 +89,15 @@ L'ampli LTC1050C satisfait toutes ces contraintes.
 
 **Filtrage:**
 
-Un montage aussi sensible étant vulnérable au bruit à 50Hz (+ harmoniques) résultant du
-couplage capacitif avec le réseau 230V, un **filtrage passe-bas est indispensable**.
-D'autres sources de bruit à filtrer sont les horloges de circuits digitaux (microcontrôleur,
-afficheurs, etc...) et les transceivers RF (bluetooth, etc...).
-Ce filtrage peut être effectué en partie du coté digital, par programme, sur le microcontrôleur.
-Cependant un **filtrage analogique est indispensable**, en effet un excès de bruit à l'entrée de
-l'ADC pourrait amener celui-ci à saturation. 
+Un montage aussi sensible étant vulnérable au bruit à 50Hz (+ harmoniques) résultant du couplage capacitif avec le réseau 230V, un **filtrage passe-bas est indispensable**.
+D'autres sources de bruit à filtrer sont les horloges de circuits digitaux (microcontrôleur, afficheurs, etc...) et les transceivers RF (bluetooth, etc...). Ce filtrage peut être effectué en partie du coté digital, par programme, sur le microcontrôleur. Cependant un **filtrage analogique est indispensable**, en effet un excès de bruit à l'entrée de l'ADC pourrait amener celui-ci à saturation. 
 
 Nous décidons de filtrer dans 3 régions de la chaîne de traitement analogique :
 - **filtre passif à l'entrée** : permet d'éviter que les bruits HF causent de la distorsion dans les étages d'entrée
 - **filtre actif basé sur les amplificateurs opérationnels** : maximum d'efficacité
 - **filtre passif en fin de chaine**, coté ADC, pour retirer le bruit introduit en cours de traitement (bruit d'alimentation, bruit d'horloge des amplificateurs à découpage)
 
-![Solution minimaliste : amplificateur transimpédance avec filtre](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/circuit2.png)
+![Amplificateur transimpédance avec filtre](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/circuit2.png)
 
 - R5 en entrée protège l'ampli opérationnel contre les décharges électrostatiques, en forme avec C1 un filtre pour les bruits en tension
 - C1 avec R1 forme un filtre pour le bruit en courant
@@ -118,10 +113,24 @@ Nous allons maintenant tester ce circuit à l'aide du logiciel d'électronique a
 
 
 ### 3.3. Réalisation d'un PCB (KiCad)
+
+![SchematiqueOLED](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/SchematiqueOLED.png)
+![SchematiqueBluetooth](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/SchematiqueBluetooth.png)
+![SchematiqueEncodeur](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/SchematiqueEncodeur.png)
+![SchematiqueAmpliOp](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/SchematiqueAmpliOp.png)
+![SchematiqueCircuitKicad](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/SchematiqueCircuit.png)
+![EmpreinteOLED](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/EmpreinteOLED.png)
+![EmpreinteBluetooth](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/EmpreinteBluetooth.png)
+![EmpreinteEncodeur](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/EmpreinteEncodeur.png)
+![EmpreinteAmpliOp](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/EmpreinteAmpliOp.png)
+![EmpreintePCB](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/EmpreintePCB.png)
+![EmpreintePinArduino](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/EmpreintePinArduino.png)
+
+
 ### 3.4. Fabrication du SHIELD
 #### 3.4.1. Fabrication du PCB
-Nous avons ensuite pu fabriquer le PCB sur une plaquette d'epoxy recouverte d'une fine couche de cuivre (environ 60µm).
-Tout d'abord, nous avons imprimé notre modélisation du PCB sur du papier calque, puis, une insolation aux UV pendant 2 minutes a permis de transposer cette "silhouette" sur notre couche d'epoxy, permettant ainsi de déposer une résine protectrice, qui grâce à un révélateur, a pu être retirée aux endroits désirés.
+Le PCB est fabriqué sur une plaquette d'epoxy recouverte d'une fine couche de cuivre.
+Nous avons tout d'abord imprimé notre modélisation du circuit sur unun film plastique qui nous sertde calque. Une insolation sous UV pendant 2 minutes permet de transposer ce calque sur notre couche d'epoxy, permettant ainsi de déposer une résine protectrice, qui grâce à un révélateur, a pu être retirée aux endroits désirés.
 Ensuite, la plaquette a été déposée dans un bain de perchlorure de fer afin d'être gravée (environ 8 minutes). A la suite de cela, le cuivre non protégé par la résine a alors été retiré, permettant d'obtenir le PCB modélisé en amont.
 Pour finir, de l'acétone a été appliquée sur la plaquette pour éliminer les dernières traces de résine.
 
@@ -139,6 +148,7 @@ mettre le code arduino
 ```
 ***
 ## 5. APK Android
+
 ***
 ## 6. Banc de test
 ***
