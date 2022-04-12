@@ -113,25 +113,37 @@ Nous allons maintenant tester ce circuit à l'aide du logiciel d'électronique a
 
 
 ### 3.3. Réalisation d'un PCB (KiCad)
-
+- Schematique de l'OLED
 ![SchematiqueOLED](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/SchematiqueOLED.png)
+- Schematique ddu module bluetooth HC-O5
 ![SchematiqueBluetooth](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/SchematiqueModuleBluetooth.png)
+- Schematique de l'encodeur rotatif KY-040
 ![SchematiqueEncodeur](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/SchematiqueEncodeurRotatif.png)
+- Schematique de l'amplificateur opérationel LTC1050
 ![SchematiqueAmpliOp](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/SchematiqueAmpliOp.png)
+- Schematique des pins de la carte Arduino
 ![SchematiquePinArduino](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/SchematiquePinArduino.png)
+- Schematique du circuit amplificateur transimpédance
 ![SchematiqueCircuitKicad](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/SchematiqueCircuitKicad.png)
+- Empreinte de l'OLED
 ![EmpreinteOLED](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/EmpreinteOLED.png)
+- Empreinte du module Bluetooth HC-05
 ![EmpreinteBluetooth](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/EmpreinteBluetooth.png)
+- Empreinte de l'encodeur rotatif KY-040
 ![EmpreinteEncodeur](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/EmpreinteEncodeur.png)
+- Empreinte de l'amplificateur opérationel LTC1050
 ![EmpreinteAmpliOp](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/EmpreinteAmpliOp.png)
+- Empreinte du PCB complet
 ![EmpreintePCB](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/EmpreintePCB.png)
+- Visualisation 3D du PCB
+![Visu3D](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/Visu3D.png)
 
 
 ### 3.4. Fabrication du SHIELD
 #### 3.4.1. Fabrication du PCB
-Le PCB est fabriqué sur une plaquette d'epoxy recouverte d'une fine couche de cuivre.
-Nous avons tout d'abord imprimé notre modélisation du circuit sur unun film plastique qui nous sertde calque. Une insolation sous UV pendant 2 minutes permet de transposer ce calque sur notre couche d'epoxy, permettant ainsi de déposer une résine protectrice, qui grâce à un révélateur, a pu être retirée aux endroits désirés.
-Ensuite, la plaquette a été déposée dans un bain de perchlorure de fer afin d'être gravée (environ 8 minutes). A la suite de cela, le cuivre non protégé par la résine a alors été retiré, permettant d'obtenir le PCB modélisé en amont.
+Le PCB est fabriqué sur une plaquette recouverte d'une fine couche de cuivre elle même recouverte d'une couche de résine.
+Nous avons tout d'abord imprimé notre modélisation du circuit sur un film plastique qui nous sert de calque. Une insolation sous UV pendant 2 minutes permet de transposer ce calque sur notre couche d'epoxy, permettant ainsi d'enlever la partie de la résine insolée.
+Ensuite, la plaquette a été déposée dans un bain de perchlorure de fer afin d'être gravée (environ 8 minutes). Seule la partie du cuivre non protégée par la résine est décapée.
 Pour finir, de l'acétone a été appliquée sur la plaquette pour éliminer les dernières traces de résine.
 
 ## 3.4.2. Perçage et soudure
