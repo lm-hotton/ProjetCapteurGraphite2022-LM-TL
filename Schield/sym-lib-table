@@ -1,0 +1,6 @@
+(sym_lib_table
+  (lib (name "ShieldLibrairie")(type "KiCad")(uri "${KIPRJMOD}/ShieldLibrairie.kicad_sym")(options "")(descr ""))
+  (lib (name "OLED")(type "KiCad")(uri "${KIPRJMOD}/OLED.kicad_sym")(options "")(descr ""))
+  (lib (name "Bluetooth")(type "KiCad")(uri "${KIPRJMOD}/Bluetooth.kicad_sym")(options "")(descr ""))
+  (lib (name "Rotatoir")(type "KiCad")(uri "${KIPRJMOD}/Rotatoir.kicad_sym")(options "")(descr ""))
+)
