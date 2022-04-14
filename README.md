@@ -73,7 +73,7 @@ Or notre microcontroleur Arduino Uno possède les caractéristiques suivantes:
 La mesure directe d'un courant aussi faible que celui que fourni notre capteur ne parait pas possible.
 
 Nous choisissons d'utiliser la solution d'un amplificateur transimpédance:
-![Solution minimaliste : amplificateur transimpédance](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/circuit1.png)
+![Solution minimaliste : amplificateur transimpédance](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/Photos_README/circuit1.png)
 Cette solution permet de :
 - conversion I->U dans la résistance d'épreuve R1 (shunt)
 - amplification à fort gain par montage non-inverseur
@@ -97,7 +97,7 @@ Nous décidons de filtrer dans 3 régions de la chaîne de traitement analogique
 - **filtre actif basé sur les amplificateurs opérationnels** : maximum d'efficacité
 - **filtre passif en fin de chaine**, coté ADC, pour retirer le bruit introduit en cours de traitement (bruit d'alimentation, bruit d'horloge des amplificateurs à découpage)
 
-![Amplificateur transimpédance avec filtre](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/circuit2.png)
+![Amplificateur transimpédance avec filtre](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/Photos_README/circuit2.png)
 
 - R5 en entrée protège l'ampli opérationnel contre les décharges électrostatiques, en forme avec C1 un filtre pour les bruits en tension
 - C1 avec R1 forme un filtre pour le bruit en courant
