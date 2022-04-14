@@ -130,7 +130,7 @@ Nous allons maintenant tester ce circuit à l'aide du logiciel d'électronique a
 - Empreinte du module Bluetooth HC-05
 ![EmpreinteBluetooth](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/Photos_KiCad/EmpreinteBluetooth.png)
 - Empreinte de l'encodeur rotatif KY-040
-![EmpreinteEncodeur](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoRs_KiCad/EmpreinteEncodeur.png)
+![EmpreinteEncodeur](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/Photos_KiCad/EmpreinteEncodeur.png)
 - Empreinte de l'amplificateur opérationel LTC1050
 ![EmpreinteAmpliOp](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/Photos_KiCad/EmpreinteAmpliOp.png)
 - Empreinte du PCB complet
