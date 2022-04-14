@@ -114,29 +114,29 @@ Nous allons maintenant tester ce circuit à l'aide du logiciel d'électronique a
 
 ### 3.3. Réalisation d'un PCB (KiCad)
 - Schematique de l'OLED
-![SchematiqueOLED](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/SchematiqueOLED.png)
+![SchematiqueOLED](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/Photos_KiCad/SchematiqueOLED.png)
 - Schematique ddu module bluetooth HC-O5
-![SchematiqueBluetooth](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/SchematiqueModuleBluetooth.png)
+![SchematiqueBluetooth](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/Photos_KiCad/SchematiqueModuleBluetooth.png)
 - Schematique de l'encodeur rotatif KY-040
-![SchematiqueEncodeur](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/SchematiqueEncodeurRotatif.png)
+![SchematiqueEncodeur](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/Photos_KiCad/SchematiqueEncodeurRotatif.png)
 - Schematique de l'amplificateur opérationel LTC1050
-![SchematiqueAmpliOp](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/SchematiqueAmpliOp.png)
+![SchematiqueAmpliOp](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/Photos_KiCad/SchematiqueAmpliOp.png)
 - Schematique des pins de la carte Arduino
-![SchematiquePinArduino](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/SchematiquePinArduino.png)
+![SchematiquePinArduino](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/Photos_KiCad/SchematiquePinArduino.png)
 - Schematique du circuit amplificateur transimpédance
-![SchematiqueCircuitKicad](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/SchematiqueCircuitKicad.png)
+![SchematiqueCircuitKicad](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/Photos_KiCad/SchematiqueCircuitKicad.png)
 - Empreinte de l'OLED
-![EmpreinteOLED](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/EmpreinteOLED.png)
+![EmpreinteOLED](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/Photos_KiCad/EmpreinteOLED.png)
 - Empreinte du module Bluetooth HC-05
-![EmpreinteBluetooth](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/EmpreinteBluetooth.png)
+![EmpreinteBluetooth](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/Photos_KiCad/EmpreinteBluetooth.png)
 - Empreinte de l'encodeur rotatif KY-040
-![EmpreinteEncodeur](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/EmpreinteEncodeur.png)
+![EmpreinteEncodeur](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoRs_KiCad/EmpreinteEncodeur.png)
 - Empreinte de l'amplificateur opérationel LTC1050
-![EmpreinteAmpliOp](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/EmpreinteAmpliOp.png)
+![EmpreinteAmpliOp](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/Photos_KiCad/EmpreinteAmpliOp.png)
 - Empreinte du PCB complet
-![EmpreintePCB](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/EmpreintePCB.png)
+![EmpreintePCB](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/Photos_KiCad/EmpreintePCB.png)
 - Visualisation 3D du PCB
-![Visu3D](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/PhotoREADME/Visu3D.png)
+![Visu3D](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM/Photos_KiCad/Visu3D.png)
 
 
 ### 3.4. Fabrication du SHIELD
