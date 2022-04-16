@@ -4,12 +4,12 @@
 1. [Description du projet, objectifs et livrables](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM#1-description-du-projet-objectifs-et-livrables)
 2. [Jauge de Déformation à base de graphite](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM#2-jauge-de-d%C3%A9formation-%C3%A0-base-de-graphite)
 3. [PCB Shield](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM#3-pcb-shield)
-- 3.1. Choix du circuit amplificateur transimpédance
-- 3.2. Test circuit électrique sur LTSpice
-- 3.3. Réalisation d'un PCB (KiCad)
-- 3.4. Fabrication du SHIELD
-- 3.4.1. Fabrication du PCB
-- 3.4.2. Perçage et soudure
+    3.1. Choix du circuit amplificateur transimpédance
+    3.2. Test circuit électrique sur LTSpice
+    3.3. Réalisation d'un PCB (KiCad)
+    3.4. Fabrication du SHIELD
+        3.4.1. Fabrication du PCB
+        3.4.2. Perçage et soudure
 4. [Code Arduino](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM#4-code-arduino)
 5. [APK Arduino](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM#5-apk-android)
 6. [Banc de test](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM#6-banc-de-test)
@@ -154,10 +154,10 @@ Une fois le PCB réalisé, nous sommes passés au perçage de trous sur notre pl
 Enfin, nous avons soudé chaque composant à l'aide d'un fer à souder.
 ***
 ## 4. Code Arduino
-Voici le code arduino qui permet de 
+Voici le code arduino qui permet d'acquérir les données de notre capteur.
 ```
 //code Capteur
-const int flexPin=A0;
+int flexPin=A0;
 
 //code bluetooth
 #include <SoftwareSerial.h>
@@ -168,198 +168,79 @@ SoftwareSerial mySerial(rxPin, txPin);
 
 //code OLED
 #include <Adafruit_SSD1306.h>
-#define nombreDePixelsEnLargeur 128                             // Taille de l'écran OLED, en pixel, au niveau de sa largeur
-#define nombreDePixelsEnHauteur 64                              // Taille de l'écran OLED, en pixel, au niveau de sa hauteur
-#define brocheResetOLED -1                                      // Reset de l'OLED partagé avec l'Arduino (d'où la valeur à -1, et non un numéro de pin)
-#define adresseI2CecranOLED 0x3C                                // Adresse de "mon" écran OLED sur le bus i2c (généralement égal à 0x3C ou 0x3D)
+#define nombreDePixelsEnLargeur 128         // Taille de l'écran OLED, en pixel, au niveau de sa largeur
+#define nombreDePixelsEnHauteur 64          // Taille de l'écran OLED, en pixel, au niveau de sa hauteur
+#define brocheResetOLED         -1          // Reset de l'OLED partagé avec l'Arduino (d'où la valeur à -1, et non un numéro de pin)
+#define adresseI2CecranOLED     0x3C        // Adresse de "mon" écran OLED sur le bus i2c (généralement égal à 0x3C ou 0x3D)
 Adafruit_SSD1306 ecranOLED(nombreDePixelsEnLargeur, nombreDePixelsEnHauteur, &Wire, brocheResetOLED);
 
 //code encodeur
-#define encoder0PinA 2          // CLK pin
-#define encoder0PinB 3          // DT pin
-#define Switch 4                // SW pin
-
-volatile unsigned int encoder0Pos = 0;
-volatile unsigned int old_encoder0Pos = 0;
-volatile unsigned int menu = 1;
-volatile unsigned int swState = 0;
-volatile unsigned int swLast = 0;
-volatile unsigned int nombre_click = 0;
-volatile unsigned int old_nombre_click = 0;
-bool derouler=false;
-bool clk=false;
-
-
-
-void doEncoder() {
-if (digitalRead(encoder0PinB)==HIGH){
-encoder0Pos++;
-}
-else{
-encoder0Pos--;
-}
-}
-
-
-int Menu() {
-if (Derouler()){
-if (menu==1){
-menu=2;
-}
-else if (menu==2){
-menu=3;
-}
-else if (menu==3){
-menu=1;
-}
-else if (menu==11||menu==22||menu==33) {
-menu=1;
-}
-}
-
-if (menu==1 && Clk()){
-menu=11;
-}
-else if (menu==2 && Clk()){
-menu=22;
-}
-else if (menu==3 && Clk()){
-menu=33;
-}
-
-return menu;
-}
-
-
-
-bool Clk(){
-swState = digitalRead(Switch);
-if (swState == LOW && swLast == HIGH) {
-nombre_click++;
-delay(100);//debounce
-}
-swLast = swState;
-
-if (nombre_click != old_nombre_click){
-clk=true;
-}
-else{
-clk=false;
-}
-old_nombre_click=nombre_click;
-return clk;
-}
-
-
-
-bool Derouler(){
-if (digitalRead(encoder0PinB)==HIGH){
-encoder0Pos++;
-}
-else{
-encoder0Pos--;
-
-if (encoder0Pos != old_encoder0Pos){
-  derouler=true;
-}
-old_encoder0Pos=encoder0Pos;
-return derouler;
-}
-}
-
+int encoderPinA = 2; // CLK pin
+int encoderPinB = 3; // DT pin
+int encoderBtn = 4; // SW pin
+int count = 0;
+int encoderPinA_prev;
+int encoderPinA_value;
+boolean bool_CW;
 
 
 void setup() {
 
-//code bluetooth
-pinMode (rxPin, INPUT);
-pinMode (txPin, OUTPUT);
-Serial.begin(baudrate);
-mySerial.begin(baudrate);
+  //code bluetooth
+  pinMode (rxPin, INPUT);
+  pinMode (txPin, OUTPUT);
+  Serial.begin(baudrate);
+  mySerial.begin(baudrate);
 
-//code capteur
-pinMode(flexPin,INPUT);
+  //code capteur
+  pinMode(flexPin,INPUT);
 
-//code Encodeur
-pinMode(encoder0PinA, INPUT);
-digitalWrite(encoder0PinA, HIGH);
+  //code Encodeur
+  pinMode (encoderPinA, INPUT);
+  pinMode (encoderPinB, INPUT);
+  pinMode(encoderBtn, INPUT_PULLUP);
+  encoderPinA_prev = digitalRead(encoderPinA);
 
-pinMode(encoder0PinB, INPUT);
-digitalWrite(encoder0PinB, HIGH);
+  //code OLED
+  if(!ecranOLED.begin(SSD1306_SWITCHCAPVCC, adresseI2CecranOLED))
+    while(1);                               // Arrêt du programme (boucle infinie) si échec d'initialisation
 
-attachInterrupt(0, doEncoder, RISING);
-
-
-//code OLED
-if(!ecranOLED.begin(SSD1306_SWITCHCAPVCC, adresseI2CecranOLED))
-while(1); // Arrêt du programme (boucle infinie) si échec d'initialisation
-
-ecranOLED.clearDisplay();
-ecranOLED.setCursor(0, 0);
-ecranOLED.setTextColor(SSD1306_WHITE);
-ecranOLED.setTextSize(2);
+   ecranOLED.clearDisplay();
+   ecranOLED.setCursor(0, 0);
+   ecranOLED.setTextColor(SSD1306_WHITE);
+   ecranOLED.setTextSize(2);
 }
-
- 
-
-
-
-
-
-
-
 
 
 void loop() {
 
-//code capteur + moniteur série ///
-float ADCflex=analogRead(flexPin);
-Serial.println(String(ADCflex));
-Serial.println();
+  //code capteur
+  float ADCflex=analogRead(flexPin);
+  //Serial.println(String(ADCflex));
+  //Serial.println();
+  
+  float Volt=(ADCflex*5/1023);
+  //Serial.println(String(Volt));
+  //Serial.println();
+ 
+  float Res=((1+100000/1000)*100000*(1023/Volt)-100000-10000)/1000000000;
+  Serial.println(String(Res));
+  //Serial.println();
 
-float Volt=(ADCflex*5/1023);
-Serial.println(String(Volt));
-Serial.println();
-
-float Res=((1+100000/1000)*100000*(1023/Volt)-100000-10000)/1000000000;
-Serial.println(String(Res));
-Serial.println();
+  // code bluetooth
+  mySerial.print(Res);
 
 
-// code bluetooth ///
-mySerial.print(Res);
-
-
-// OLED ///
-ecranOLED.setCursor(0, 0);
-
-if (Menu()==1){
-ecranOLED.print("Mesure tension \n Cliquez pour pour voir la valeur + BT");
+   // OLED
+   ecranOLED.setCursor(0, 0);
+   ecranOLED.print(Volt);
+   ecranOLED.print(" V \n");
+   ecranOLED.print(Res);
+   ecranOLED.print(" MOhm \n");
+   ecranOLED.display();                            // Transfert le buffer à l'écran
+   delay(1000);
+   ecranOLED.clearDisplay();
 }
-else if (Menu()==2){
-ecranOLED.print("Mesure résistance \n Cliquez pour pour voir la valeur + BT");
-}
-else if (Menu()==3){
-ecranOLED.print("Cliquez pour pour voir les infos du capteur et la fréquence");
-}
-else if (Menu()==11){
-ecranOLED.print(Volt);
-ecranOLED.print(" V \n");
-}
-else if (Menu()==22){
-ecranOLED.print(Res);
-ecranOLED.print(" MOhm \n");
-}
-else if (Menu()==33){
-ecranOLED.print("Infos capteur \n Résistance: 1-100MO \n Tension: 0-5V\n Delay: ");
-ecranOLED.print(100);
-}
-
-ecranOLED.display(); // Transfert le buffer à l'écran
-delay(1000);
-ecranOLED.clearDisplay();
-}
-
 ```
 ***
 ## 5. APK Android
@@ -400,8 +281,7 @@ Les mesures en compression restent valables au dela.
 
 ***
 ## 7. Datasheet
-Nous avons réalisé la datasheet de notre capteur en utilisant un crayon papier HB et B.
-![Datasheet.pdf](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_KiCad/Visu3D.png)
+Nous avons réalisé la [datasheet](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_KiCad/Visu3D.png) de notre capteur en utilisant un crayon papier HB et B.
 ***
 ## 8. Solutions d'amélioration
 
