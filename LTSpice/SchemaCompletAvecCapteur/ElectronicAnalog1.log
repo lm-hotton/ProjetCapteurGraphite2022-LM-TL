@@ -1,0 +1,21 @@
+Circuit: * U:\Windows\Bureau\projet_capteur\ElecAnalog\SchemaCompletAvecCapteur\ElectronicAnalog1.asc
+
+Direct Newton iteration for .op point succeeded.
+
+Date: Fri Apr 15 19:19:26 2022
+Total elapsed time: 0.341 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 41300
+traniter = 41278
+tranpoints = 20640
+accept = 13273
+rejected = 7367
+matrix size = 16
+fillins = 5
+solver = Normal
+Matrix Compiler1: 692 bytes object code size  0.3/0.1/[0.1]
+Matrix Compiler2: 1.30 KB object code size  0.1/0.2/[0.1]
+

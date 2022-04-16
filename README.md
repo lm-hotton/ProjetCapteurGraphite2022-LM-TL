@@ -366,8 +366,43 @@ ecranOLED.clearDisplay();
 
 ***
 ## 6. Banc de test
+Nous avons élaborer un banc de test à l'aide d'un servomoteur, du scotch double face et des morceaux de carton et plastique d'empballage. Nous avons fixé une partie du capteur sur le stator à l'aide d'un morceau de carton et d'un scotch double face, et l'autre partie du capteur est fixée sur le rotor à l'aide d'un morceau de plastique et de scotch double face.
+
+![Photo Banc de test](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_KiCad/Visu3D.png)
+
+### Premier test : DeltaR/R0 HB Compression
+Pour réaliser cette partie, nous avons mesurer 5 cycles de compression que nous avons moyenner pour obtenir la résistance relative en fonction de l'angle appliqué.
+![Datasheet.pdf](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_KiCad/Visu3D.png)
+
+### Second test : DeltaR/R0 HB Deflexion
+Pour réaliser cette partie, nous avons mesurer 5 cycles de déflexion que nous avons moyenner pour obtenir la résistance relative en fonction de l'angle appliqué.
+![Datasheet.pdf](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_KiCad/Visu3D.png)
+
+### Troisième test : DeltaR/R0 B Compression
+Pour réaliser cette partie, nous avons mesurer 5 cycles de compression que nous avons moyenner pour obtenir la résistance relative en fonction de l'angle appliqué.
+![Datasheet.pdf](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_KiCad/Visu3D.png)
+
+### Quatrième test : DeltaR/R0 B Deflexion
+Pour réaliser cette partie, nous avons mesurer 5 cycles de déflexion que nous avons moyenner pour obtenir la résistance relative en fonction de l'angle appliqué.
+![Datasheet.pdf](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_KiCad/Visu3D.png)
+
+### Cinquième test : Répetabilité des mesures HB
+Pour réaliser cette partie, nous effectuons plusieurs cycles de compression-déflexion jusqu'à obtenir des valeurs divergentes des premières de plus de 10%.
+![Datasheet.pdf](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_KiCad/Visu3D.png)
+Nous pouvons voir qu'à partir de à peu près 260 cycles, le capteur ne peut plus garantir de bons résultats en deflexion.
+Les mesures en compression restent valables au dela.
+
+### Sixième test : Répetabilité des mesures B
+Pour réaliser cette partie, nous effectuons plusieurs cycles de compression-déflexion jusqu'à obtenir des valeurs divergentes des premières de plus de 10%.
+![Datasheet.pdf](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_KiCad/Visu3D.png)
+Nous pouvons voir qu'à partir d'une centaine de cycles, le capteur ne peut plus garantir de bons résultats en deflexion.
+Les mesures en compression restent valables au dela.
+
 ***
 ## 7. Datasheet
+Nous avons réalisé la datasheet de notre capteur en utilisant un crayon papier HB et B.
+![Datasheet.pdf](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_KiCad/Visu3D.png)
 ***
 ## 8. Solutions d'amélioration
+
 ***
