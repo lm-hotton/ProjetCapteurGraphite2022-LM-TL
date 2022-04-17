@@ -57,13 +57,13 @@ Dans notre projet, nous avons utilisé des crayons **HB et B**.
 
 Le principe physique du capteur repose sur l'organisation en **système granulaire** du réseau des nanoparticules de graphite sur le papier.
 
-![Système granulaire](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_README/granulaire.png)
+![Système granulaire](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_README/granulaire.png =100x20)
 
-En effet, la conductance d'un système granulaire varie en fonction de :
-- **Les distances internanoparticules**
-- La constante de l'effet tunnel
-- L'énergie de charge de Coulomb
-- La température
+En effet, la **conductance d'un système granulaire** varie en fonction :
+- des **distances internanoparticules**
+- de la constante de l'effet tunnel
+- de l'énergie de charge de Coulomb
+- de la température
 
 Ici, la compression et l'extension de la feuille de papier peut modifier la distance entre les Nano particules de graphite. La compression rapproche les particules de graphite, augmente la conductance, diminue la résistivité. Au contraire, l'extension de la feuille de papier Augmente la distance entre les particules de graphite, diminue la conductance, augmente la résistance.
 Ainsi, en mesurant la variation de la résistance entre les deux électrodes de notre capteur, nous pouvons en déduire la déformation de notre capteur.
@@ -129,10 +129,11 @@ Nous décidons de filtrer dans 3 régions de la chaîne de traitement analogique
 Nous allons maintenant tester ce circuit à l'aide du logiciel d'électronique analogique LTSpice.
 
 ### 3.2. Test circuit électrique sur LTSpice
-
+Nous réalisons une simulation de notre circuit d'amplification transimpédance sur LTSpice pour simuler son comportement.
+![SchematiqueOLED](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_LTSpice/circuit3.png)
 #### Test fonctionalité dans les conditions nominales
 ![SchematiqueOLED](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_LTSpice/gain.jpg)
-Nous obtenons bien un gain de 100 dans les conditions nominales.
+Dans les conditions nominales, nous obtenons bien un gain de 100 en sortie du circuit amplificateur.
 ![SchematiqueOLED](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_TLSpice/courantentrée.jpg)
 Vérification de la tension de sortie avec un pulse de courant d'entrée à 100 nA.
 #### Incidence de l'offset de l'amplificateur
