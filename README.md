@@ -73,7 +73,7 @@ Ainsi, en mesurant la variation de la résistance entre les deux électrodes de 
 ### 3.1. Choix du circuit amplificateur transimpédance
 Dans notre projet, nous souhaitons mesurer la résistance de notre capteur.
 Nous décidons d'imposer une tension au borne de notre capteur et de mesurer le courant pour en déduire la résistance. 
-Cependant le courant que nous mesurons est très faible du nano au micro-ampère.
+Cependant le courant que nous devons mesurer est très faible du nano au micro-ampère.
 Or notre microcontroleur Arduino Uno possède les caractéristiques suivantes:
 - résolution 10 à 12 bits (1024 à 4096 points)
 - pleine échelle (VRef) de 1.1 V à 5.0 V
@@ -98,9 +98,9 @@ Tension aux bornes de R1 : le courant Isens est d’environ 100nA
  Tension sur l’ADC : Gain*Tension aux bornes de R1 => 501*10x10-3~5V 
 
 Nous devons donc choisir un amplificateur possèdant les caractéristiques suivantes :
-- un **faible courant d'entrée**: très petit devant Isens pour avoir le Isens traverse la R1 et
+- un **faible courant d'entrée**: doit être très petit devant Isens pour avoir le Isens traverse la résistance R1 et
 pas l’entrée 
-- un **ultra-faible offset de tension** : erreur constante aux entrées de l’amplificateur différentiel dû à un
+- un **ultra-faible offset de tension** : c'est une erreur constante aux entrées de l’amplificateur différentiel dû à un
 état non compensé sur l’étage d’entrée de l’amplificateur. On veut que cet offset soit
 négligeable devant la tension mesurée sur R1 qui sera de 10mV. 
 - **doit supporter un mode commun à la tension d'alimentation négative** ("low rail") : tension commune aux deux entrées, un bon amplifieur sera insensible
@@ -131,29 +131,45 @@ Nous décidons de filtrer dans 3 régions de la chaîne de traitement analogique
 Nous allons maintenant tester ce circuit à l'aide du logiciel d'électronique analogique LTSpice.
 
 ### 3.2. Test circuit électrique sur LTSpice
-Nous réalisons une simulation de notre circuit d'amplification transimpédance sur LTSpice pour simuler son comportement.
+Nous réalisons un schéma de notre circuit d'amplification transimpédance sur LTSpice pour simuler son comportement.
 ![SchematiqueOLED](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_README/circuit3.png)
 #### Test fonctionalité dans les conditions nominales
 ![SchematiqueOLED](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_LTSpice/gain.jpg)
 Dans les conditions nominales, nous obtenons bien un gain de 100 en sortie du circuit amplificateur.
-![SchematiqueOLED](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_TLSpice/courantentrée.jpg)
+![SchematiqueOLED](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_LTSpice/courantentrée.jpg)
 Vérification de la tension de sortie avec un pulse de courant d'entrée à 100 nA.
 #### Incidence de l'offset de l'amplificateur
 La [datasheet de l'amplificateur opérationel LTC1050C](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Datasheet_LTC1050/Datasheet_LTC1050.pdf)
-nous indique que 
+nous indique que l'offset de tension en sortie de l'amplificateur est de 5uV. On veut que cet offset soit
+négligeable devant la tension mesurée sur R1 qui sera de 10mV. 
+L'incidence de l'offset de cet amplificateur est donc acceptable.
 #### Incidence du courant d'entrée de l'amplificateur
+La [datasheet de l'amplificateur opérationel LTC1050C](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Datasheet_LTC1050/Datasheet_LTC1050.pdf)
+nous indique que l'offset de courant en entrée de l'amplificateur est de +/- 200 pA, bien inférieur à 100nA. 
+On a donc un faible courant d'entrée, très petit devant Isens pour avoir le Isens qui traverse la résistance R1 et
+pas l’entrée de l'amplificatieur.
+L'incidence de l'offset de cet amplificateur est donc acceptable.
 #### Fréquence de coupure de chaque étage de filtre passe-bas
 ##### Etage C1-R1: Filtre pour le bruit en courant
 ![SchematiqueOLED](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_LTSpice/C1R1.png)
+- fc = 16 Hz
 ##### Etage C4-R3: Filtre actif
 ![SchematiqueOLED](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_LTSpice/C4R3.png)
+- fc = 1,6 Hz
 ##### Etage C2-R6: Filtre de sortie
 ![SchematiqueOLED](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_LTSpice/C2R6.png)
-#### Atténuation globale d'un bruit en courant de 50Hz
-![SchematiqueOLED](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_LTSpice/50Hz.png)
+- fc = 1,6 kHz
 #### Atténaution globale d'un bruit en courant à la fréquence de limite de repliement dans le cas de l'ADC Arduino UNO
-![SchematiqueOLED](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_LTSpice/C2R6.png)
+![SchematiqueOLED](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_LTSpice/repliement.jpg)
+On constate qu'il y a une atténuation d'un bruit en courant environ égale à **40dB pour une fréquence autour de 50Hz** et de **100 dB pour un bruit en courant au voisinage de la fréquence de repliement de spectre** (7,7 kHz).
+#### Expression analytique de la résistance du capteur en fonction des éléments du circuit transimpédance
+R1 = 100 000 Ohm
+R2 = 1000 Ohm
+R3 = 100 000 Ohm
+R4 = 10 000 Ohm
+Vcc = 5 V
 
+-> Rsens (Ohm) = (1+R3/R2).R1.(Vcc/(Vadc.5/1024))-R1-R4
 
 ### 3.3. Réalisation d'un PCB (KiCad)
 Pour réaliser les schématiques et les empreintes de de nos composants, nous nous servons de leurs [datasheets](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Datasheets_Compsants) en ligne. 
@@ -162,28 +178,22 @@ Pour faire le PCB, nous avons respecté quelques règles :
 - Isolation de piste : 0.9mm minimum
 - Bluetooth, Encodeur rotatif, OLED, Connecteurs (header): pad à 1mm de percage, Ovale 2*2.54mm
 - Résistance, Capacité, Support d'AOP: Pad à 0.8mm de percage, Cercle 2.54mm
-- AOP support: pad n°1 rectangulaire, les autres sont ovales ou ronds
+- Support de l'AOP: pad n°1 rectangulaire, les autres sont ovales ou ronds
 
-#### Schematique de l'OLED
-![SchematiqueOLED](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_KiCad/SchematiqueOLED.png)
-#### Schematique ddu module bluetooth HC-O5
-![SchematiqueBluetooth](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_KiCad/SchematiqueModuleBluetooth.png)
-#### Schematique de l'encodeur rotatif KY-040
-![SchematiqueEncodeur](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_KiCad/SchematiqueEncodeurRotatif.png)
-#### Schematique de l'amplificateur opérationel LTC1050
-![SchematiqueAmpliOp](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_KiCad/SchematiqueAmpliOp.png)
-#### Schematique des pins de la carte Arduino
+#### Schematique et empreinte de l'OLED
+![SchematiqueOLED](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_KiCad/SchematiqueOLED.png) ![EmpreinteOLED](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_KiCad/EmpreinteOLED.png)
+#### Schematique et empreinte du module bluetooth HC-O5
+![SchematiqueBluetooth](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_KiCad/SchematiqueModuleBluetooth.png) ![EmpreinteBluetooth](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_KiCad/EmpreinteBluetooth.png)
+#### Schematique et empreinte de l'encodeur rotatif KY-040
+![SchematiqueEncodeur](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_KiCad/SchematiqueEncodeurRotatif.png) ![EmpreinteEncodeur](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_KiCad/EmpreinteEncodeur.png)
+#### Schematique et empreinte l'amplificateur opérationel LTC1050
+![SchematiqueAmpliOp](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_KiCad/SchematiqueAmpliOp.png) ![EmpreinteAmpliOp](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_KiCad/EmpreinteAmpliOp.png)
+#### Schematique et empreinte des pins de la carte Arduino
 ![SchematiquePinArduino](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_KiCad/SchematiquePinArduino.png)
 #### Schematique du circuit amplificateur transimpédance
 ![SchematiqueCircuitKicad](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_KiCad/SchematiqueCircuitKicad.png)
-#### Empreinte de l'OLED
-![EmpreinteOLED](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_KiCad/EmpreinteOLED.png)
-#### Empreinte du module Bluetooth HC-05
-![EmpreinteBluetooth](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_KiCad/EmpreinteBluetooth.png)
-#### Empreinte de l'encodeur rotatif KY-040
-![EmpreinteEncodeur](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_KiCad/EmpreinteEncodeur.png)
-#### Empreinte de l'amplificateur opérationel LTC1050
-![EmpreinteAmpliOp](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_KiCad/EmpreinteAmpliOp.png)
+
+
 #### Empreinte du PCB complet
 Nous avons utilisé l'empreinte d'une carte Arduino Uno existante dans les bibliothèques de KiCad, sur laquelle nous avons placé nos composants. 
 Les masses (GND) sont toutes reliées entre elles par une piscine ce qui permet une meilleure homogénéité des équipotentiels sur tout le circuit, pour de meilleurs résultats à haute fréquence.
@@ -199,14 +209,16 @@ Enfin, nous avons soudé chaque composant à l'aide d'un fer à souder.
 ### 3.4. Fabrication du SHIELD
 #### 3.4.1. Fabrication du PCB
 Le PCB est fabriqué sur une plaquette recouverte d'une fine couche de cuivre, elle même recouverte d'une couche de résine photosensible aux UV.
-Nous avons tout d'abord imprimé notre modélisation du circuit sur un film plastique qui nous sert de calque. Une insolation sous UV pendant 2 minutes permet de transposer ce calque sur notre couche de résine, permettant ainsi d'enlever la partie de la résine insolée.
+Nous avons tout d'abord imprimé notre modélisation du circuit sur un film plastique qui nous sert de calque. 
+![Gerber](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Schield/PDF/Calque.png)
+Une insolation sous UV pendant 2 minutes permet de transposer ce calque sur notre couche de résine, permettant ainsi d'enlever la partie de la résine insolée.
 Ensuite, la plaquette a été déposée dans un bain de perchlorure de fer afin d'être gravée (environ 8 minutes). Seule la partie du cuivre non protégée par la résine est décapée.
 Pour finir, de l'acétone a été appliquée sur la plaquette pour éliminer les dernières traces de résine.
 ## 3.4.2. Perçage et soudure
-Une fois le circuit en cuivre du PCB réalisé, nous avons percé les trous sur notre plaquette à l'aide d'une perçeuse électrique.
+Une fois le circuit en cuivre du PCB réalisé, nous avons percé les trous sur notre plaquette à l'aide d'une perçeuse électrique. 
 ***
 ## 4. Code Arduino
-Voici le code arduino qui permet d'acquérir les mesures de notre capteur, les afficher sur l'écran OLED et les envoyer par bluetooth à un smatrphone. 
+Voici le code arduino qui permet d'acquérir les mesures de notre capteur, les afficher sur l'écran OLED et les envoyer par bluetooth à un smatrphone.
 ```
 //code Capteur
 int flexPin=A0;
@@ -275,7 +287,7 @@ void loop() {
   //Serial.println(String(Volt));
   //Serial.println();
  
-  float Res=((1+100000/1000)*100000*(1023/Volt)-100000-10000)/1000000000;
+  float Res=((1+100000/1000)*100000*(5/Volt)-100000-10000)/1000000;
   Serial.println(String(Res));
   //Serial.println();
 
@@ -296,7 +308,8 @@ void loop() {
 ```
 ***
 ## 5. APK Android
-
+![block](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/APK_CapteurGraphite/APKblock.png)
+![telephone](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/APK_CapteurGraphite/APKtel.png)
 ***
 ## 6. Banc de test
 Nous avons élaborer un banc de test à l'aide d'un servomoteur, du scotch double face et des morceaux de carton et plastique d'empballage. 
@@ -337,5 +350,8 @@ Les mesures en compression restent valables au dela.
 Voici la [datasheet](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Datasheet_CapteurGraphite/Datasheet_CapteurGraphite.pdf) de notre capteur.
 ***
 ## 8. Solutions d'amélioration
-
+### Solutions d'amélioration
+- Trouver une méthode pour déposer la même quantité de graphite sur chaque capteur testé
+- Anticiper les besoins du banc de test dans la conception du PCB
+- Trouver un moyen de fixer les pinces sur les electrodes lors des mesures
 ***

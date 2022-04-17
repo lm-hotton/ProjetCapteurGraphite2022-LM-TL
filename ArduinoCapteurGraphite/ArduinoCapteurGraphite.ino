@@ -65,7 +65,7 @@ void loop() {
   //Serial.println(String(Volt));
   //Serial.println();
  
-  float Res=((1+100000/1000)*100000*(1023/Volt)-100000-10000)/1000000000;
+  float Res=((1+100000/1000)*100000*(5/Volt)-100000-10000)/1000000;
   Serial.println(String(Res));
   //Serial.println();
 
@@ -80,6 +80,6 @@ void loop() {
    ecranOLED.print(Res);
    ecranOLED.print(" MOhm \n");
    ecranOLED.display();                            // Transfert le buffer à l'écran
-   delay(1000);
+   delay(500);
    ecranOLED.clearDisplay();
 }
