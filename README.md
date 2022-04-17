@@ -57,7 +57,7 @@ Dans notre projet, nous avons utilisé des crayons **HB et B**.
 
 Le principe physique du capteur repose sur l'organisation en **système granulaire** du réseau des nanoparticules de graphite sur le papier.
 
-![Système granulaire](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_README/granulaire.png =100x20)
+![Système granulaire](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_README/granulaire.png =100*20)
 
 En effet, la **conductance d'un système granulaire** varie en fonction :
 - des **distances internanoparticules**
