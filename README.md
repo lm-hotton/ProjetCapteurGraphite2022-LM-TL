@@ -106,7 +106,7 @@ négligeable devant la tension mesurée sur R1 qui sera de 10mV.
 voltage, et maximum offset voltage drift : 0.05µV/°C. Bien comparé aux 10mV aux
 bornes de R1. 
 
-L'[amplificateur LTC1050C]() satisfait bien toutes ces contraintes.
+L'[amplificateur LTC1050C](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Datasheet_LTC1050/Datasheet_LTC1050.pdf) satisfait bien toutes ces contraintes.
 
 **Filtrage:**
 
@@ -118,7 +118,7 @@ Nous décidons de filtrer dans 3 régions de la chaîne de traitement analogique
 - **filtre actif basé sur les amplificateurs opérationnels** : maximum d'efficacité
 - **filtre passif en fin de chaine**, coté ADC, pour retirer le bruit introduit en cours de traitement (bruit d'alimentation, bruit d'horloge des amplificateurs à découpage)
 
-![Amplificateur transimpédance avec filtre](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Datasheet_LTC1050/Datasheet_LTC1050.pdf)
+![Amplificateur transimpédance avec filtre](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_README/circuit2.png)
 
 - **R5** en entrée protège l'ampli opérationnel contre les décharges électrostatiques, en forme avec C1 un filtre pour les bruits en tension
 - **C1 avec R1** forme un **filtre pour le bruit en courant**
