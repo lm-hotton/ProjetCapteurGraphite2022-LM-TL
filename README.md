@@ -50,15 +50,17 @@ Les dispositifs électroniques à base de papier sont de plus en plus étudiés 
 
 Quand on trace un trait au crayon sur du papier, la friction entre le crayon et le papier arrache des particules de graphite qui adhèrent sur les fibres de papier. Ainsi les crayons à papier sont un bon moyen de déposer de fines particules de graphite sur un support.
 Ces traces de crayon peuvent être vues comme de fins films conducteurs fait de réseaus de particules de graphite.
+
 Les différents types de crayon à papier varie en fonction de la composition de leurs mines. Les mines vont du 9H, les plus durs, jusqu'au 9B, les moins dur. Plus les mines sont dures, moins il y a de carbone dans leur composition, moins le film de graphite qu'elles déposent est conducteur.
 Ainsi, le 9B est plus conducteur que le 9H.
 Dans notre projet, nous avons utilisé des crayons **HB et B**.
+
 Le principe physique du capteur repose sur l'organisation en **système granulaire** du réseau des nanoparticules de graphite sur le papier.
 
-![Solution minimaliste : amplificateur transimpédance](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_README/granulaire.png)
+![Système granulaire](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_README/granulaire.png)
 
 En effet, la conductance d'un système granulaire varie en fonction de :
-- **Les distances intern nanoparticules**
+- **Les distances internanoparticules**
 - La constante de l'effet tunnel
 - L'énergie de charge de Coulomb
 - La température
@@ -127,6 +129,25 @@ Nous décidons de filtrer dans 3 régions de la chaîne de traitement analogique
 Nous allons maintenant tester ce circuit à l'aide du logiciel d'électronique analogique LTSpice.
 
 ### 3.2. Test circuit électrique sur LTSpice
+
+#### Test fonctionalité dans les conditions nominales
+![SchematiqueOLED](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_LTSpice/gain.jpg)
+Nous obtenons bien un gain de 100 dans les conditions nominales.
+![SchematiqueOLED](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_TLSpice/courantentrée.jpg)
+Vérification de la tension de sortie avec un pulse de courant d'entrée à 100 nA.
+#### Incidence de l'offset de l'amplificateur
+#### Incidence du courant d'entrée de l'amplificateur
+#### Fréquence de coupure de chaque étage de filtre passe-bas
+##### Etage C1-R1: Filtre pour le bruit en courant
+![SchematiqueOLED](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_LTSpice/C1R1.png)
+##### Etage C4-R3: Filtre actif
+![SchematiqueOLED](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_LTSpice/C4R3.png)
+##### Etage C2-R6: Filtre de sortie
+![SchematiqueOLED](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_LTSpice/C2R6.png)
+#### Atténuation globale d'un bruit en courant de 50Hz
+![SchematiqueOLED](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_LTSpice/50Hz.png)
+#### Atténaution globale d'un bruit en courant à la fréquence de limite de repliement dans le cas de l'ADC Arduino UNO
+![SchematiqueOLED](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_LTSpice/C2R6.png)
 
 
 ### 3.3. Réalisation d'un PCB (KiCad)
