@@ -4,12 +4,12 @@
 1. [Description du projet, objectifs et livrables](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM#1-description-du-projet-objectifs-et-livrables)
 2. [Jauge de Déformation à base de graphite](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM#2-jauge-de-d%C3%A9formation-%C3%A0-base-de-graphite)
 3. [PCB Shield](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM#3-pcb-shield)
-    3.1. Choix du circuit amplificateur transimpédance
-    3.2. Test circuit électrique sur LTSpice
-    3.3. Réalisation d'un PCB (KiCad)
-    3.4. Fabrication du SHIELD
-        3.4.1. Fabrication du PCB
-        3.4.2. Perçage et soudure
+- 3.1. Choix du circuit amplificateur transimpédance
+- 3.2. Test circuit électrique sur LTSpice
+- 3.3. Réalisation d'un PCB (KiCad)
+- 3.4. Fabrication du SHIELD
+- 3.4.1. Fabrication du PCB
+- 3.4.2. Perçage et soudure
 4. [Code Arduino](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM#4-code-arduino)
 5. [APK Arduino](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM#5-apk-android)
 6. [Banc de test](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/LM#6-banc-de-test)
@@ -20,25 +20,24 @@
 ## 1. Description du projet, objectifs et livrables
 
 ### 1.1. Description du projet et objectifs
-Cette UF est basée sur les travaux de chercheurs dans le domaine des capteurs afin d’évaluer les potentialités de leur technologie low-tech. Cette année, le capteur étudié est un [capteur de déformation à base de graphite](https://www.researchgate.net/publication/259846610_Pencil_Drawn_Strain_Gauges_and_Chemiresistors_on_Paper). 
-
+Ce projet est inscrit dans le cadre de l'UF "Du capteur au banc de test en open source hardware". Il est basée sur les travaux de chercheurs dans le domaine des capteurs afin d’évaluer les potentialités de leur technologie low-tech. Cette année, le capteur étudié est un [capteur de déformation à base de graphite](https://www.researchgate.net/publication/259846610_Pencil_Drawn_Strain_Gauges_and_Chemiresistors_on_Paper). 
+Pour réaliser ce projet, il faut comprendre les propriétés physiques du capteur, concevoir et réaliser un système d'acquisition, élaborer un banc de test pour notre capteur pour enfin rédiger la datasheet de ce capteur.
 ### 1.2. Livrables
-Pour réaliser ce projet
-Nous avons réalisé le capteur graphite, un **shield PCB** associé à une carte Arduino UNO comprenant:
-- **un amplificateur transimpédance**
-- **un module bluetooth**
-- un écran OLED
-- un encodeur rotatif
+Les livrables de ce projet sont donc: 
+- un **shield PCB** associé à une carte Arduino UNO comprenant:
+  - **un circuit analogique amplificateur transimpédance**
+  - **un module bluetooth** permettant de transmettre les mesures sur un téléphone
+  - un écran OLED permettant de voir les mesures en temps réel
+  - un encodeur rotatif permettant de naviguer dans le menu de l'écran OLED
+- le **code Arduino** permettant:
+  - la mesure de notre capteur de déformation à base de graphite
+  - d'envoyer les données via un module bluetooth
+  - l'affichage sur un écran OLED
+  - l'encodeur rotatif permettant de naviguer dans le menu de l'OLED
 
-Nous avons créer le **code Arduino** permettant de gérer:
-- la mesure du capteur de déformation à base de graphite
-- le module bluetooth
-- l'affichage de l'écran OLED avec un menu
-- l'encodeur rotatif pour naviguer sur l'OLED
+Nous avons également créé un **APK Android** permettant d'afficher la valeur de la résistance mesurée sur un smartphone.
 
-Nous avons également créé un **APK Android** permettant d'afficher la valeur de la résistance mesurée grâce à notre shield PCB avec lequel on communique grâce au module bluetooth et au microcontrolleur Arduino UNO.
-
-Enfin nous avons conçu un **banc de test** de notre capteur pour rédiger sa **datasheet** et pouvoir proposer des **solutions d'améliorations et les limites** pour ce type de capteur.
+Enfin nous avons conçu un **banc de test** pour notre capteur afin de rédiger une **datasheet** associée et pouvoir proposer des **solutions d'améliorations et les limites** pour ce type de capteur.
 ***
 
 ## 2. Jauge de déformation à base de graphite
@@ -49,14 +48,23 @@ Les dispositifs électroniques à base de papier sont de plus en plus étudiés 
 - portables
 - écologiques
 
-Dans notre projet, nous utilisons du papier et du graphite comme une jauge de contrainte pour détecter des contraintes de courbure.
-Le crayon à papier peut être vu comme un moyen de déposer de fines couches de particules de graphites à la surface d'une fauille de papier par friction.
+Quand on trace un trait au crayon sur du papier, la friction entre le crayon et le papier arrache des particules de graphite qui adhèrent sur les fibres de papier. Ainsi les crayons à papier sont un bon moyen de déposer de fines particules de graphite sur un support.
+Ces traces de crayon peuvent être vues comme de fins films conducteurs fait de réseaus de particules de graphite.
+Les différents types de crayon à papier varie en fonction de la composition de leurs mines. Les mines vont du 9H, les plus durs, jusqu'au 9B, les moins dur. Plus les mines sont dures, moins il y a de carbone dans leur composition, moins le film de graphite qu'elles déposent est conducteur.
+Ainsi, le 9B est plus conducteur que le 9H.
+Dans notre projet, nous avons utilisé des crayons **HB et B**.
+Le principe physique du capteur repose sur l'organisation en **système granulaire** du réseau des nanoparticules de graphite sur le papier.
 
-Ces fines couches de particules de graphite peuvent devenir conducteurs en fonction du type de crayon utilisé et de la quantité déposée.
+![Solution minimaliste : amplificateur transimpédance](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_README/granulaire.png)
 
-Dans notre cas, le type de crayon utilisé sera : **jsp**
+En effet, la conductance d'un système granulaire varie en fonction de :
+- **Les distances intern nanoparticules**
+- La constante de l'effet tunnel
+- L'énergie de charge de Coulomb
+- La température
 
-
+Ici, la compression et l'extension de la feuille de papier peut modifier la distance entre les Nano particules de graphite. La compression rapproche les particules de graphite, augmente la conductance, diminue la résistivité. Au contraire, l'extension de la feuille de papier Augmente la distance entre les particules de graphite, diminue la conductance, augmente la résistance.
+Ainsi, en mesurant la variation de la résistance entre les deux électrodes de notre capteur, nous pouvons en déduire la déformation de notre capteur.
 
 ***
 ## 3. PCB shield
@@ -74,22 +82,33 @@ La mesure directe d'un courant aussi faible que celui que fourni notre capteur n
 
 Nous choisissons d'utiliser la solution d'un amplificateur transimpédance:
 ![Solution minimaliste : amplificateur transimpédance](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_README/circuit1.png)
-Cette solution permet de :
-- conversion I->U dans la résistance d'épreuve R1 (shunt)
-- amplification à fort gain par montage non-inverseur
+Cette solution permet :
+- la conversion courant I -> tension U dans la résistance d'épreuve R1 (shunt)
+- l' amplification à fort gain par montage non-inverseur
 - la chute de tension sur R1 perturbe (un peu) la tension appliquée au capteur
 - peut fonctionner avec seulement une alimentation positive (nécessaire avec l'utilisation d'un microcontroleur Arduino Uno)
 
-Nous devons donc choisir un amplificateur possèdant les caractéristiques suivantes :
-- faible courant d'entrée
-- ultra-faible offset de tension
-- supporte mode commun à la tension d'alim négative ("low rail") 
+Gain de l’étage de l’AOP : (R2+R3)/R2=(1k+500k)/1k=501
+Tension aux bornes de R1 : le courant Isens est d’environ 100nA
+-> V = 100kOhm*100nA=10-2V=10mV
+Tension sur l’ADC : Gain*Tension aux bornes de R1 => 501*10x10-3~5V 
 
-L'ampli LTC1050C satisfait toutes ces contraintes.
+Nous devons donc choisir un amplificateur possèdant les caractéristiques suivantes :
+- un **faible courant d'entrée**: très petit devant Isens pour avoir le Isens traverse la R1 et
+pas l’entrée 
+- un **ultra-faible offset de tension** : erreur constante aux entrées de l’amplificateur différentiel dû à un
+état non compensé sur l’étage d’entrée de l’amplificateur. On veut que cet offset soit
+négligeable devant la tension mesurée sur R1 qui sera de 10mV. 
+- **doit supporter un mode commun à la tension d'alimentation négative** ("low rail") : tension commune aux deux entrées, un bon amplifieur sera insensible
+à ce mode commun. Si le Isens =0A ,on veut 0V sur l’ADC. LTC1050C => 5µV offset
+voltage, et maximum offset voltage drift : 0.05µV/°C. Bien comparé aux 10mV aux
+bornes de R1. 
+
+L'[amplificateur LTC1050C]() satisfait bien toutes ces contraintes.
 
 **Filtrage:**
 
-Un montage aussi sensible étant vulnérable au bruit à 50Hz (+ harmoniques) résultant du couplage capacitif avec le réseau 230V, un **filtrage passe-bas est indispensable**.
+Cependant un montage aussi sensible étant vulnérable au bruit à 50Hz (+ harmoniques) résultant du couplage capacitif avec le réseau 230V, un **filtrage passe-bas est indispensable**.
 D'autres sources de bruit à filtrer sont les horloges de circuits digitaux (microcontrôleur, afficheurs, etc...) et les transceivers RF (bluetooth, etc...). Ce filtrage peut être effectué en partie du coté digital, par programme, sur le microcontrôleur. Cependant un **filtrage analogique est indispensable**, en effet un excès de bruit à l'entrée de l'ADC pourrait amener celui-ci à saturation. 
 
 Nous décidons de filtrer dans 3 régions de la chaîne de traitement analogique :
@@ -97,19 +116,17 @@ Nous décidons de filtrer dans 3 régions de la chaîne de traitement analogique
 - **filtre actif basé sur les amplificateurs opérationnels** : maximum d'efficacité
 - **filtre passif en fin de chaine**, coté ADC, pour retirer le bruit introduit en cours de traitement (bruit d'alimentation, bruit d'horloge des amplificateurs à découpage)
 
-![Amplificateur transimpédance avec filtre](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Photos_README/circuit2.png)
+![Amplificateur transimpédance avec filtre](https://github.com/lm-hotton/ProjetCapteurGraphite2022-LM-TL/blob/main/Datasheet_LTC1050/Datasheet_LTC1050.pdf)
 
-- R5 en entrée protège l'ampli opérationnel contre les décharges électrostatiques, en forme avec C1 un filtre pour les bruits en tension
-- C1 avec R1 forme un filtre pour le bruit en courant
-- R2 sera interchangeable, pour permettre une adaptation du calibre
-- C4 avec R3 forme un filtre actif
-- C2 avec R6 forme le filtre de sortie
-- C3 filtre le bruit d'alimentation 
+- **R5** en entrée protège l'ampli opérationnel contre les décharges électrostatiques, en forme avec C1 un filtre pour les bruits en tension
+- **C1 avec R1** forme un **filtre pour le bruit en courant**
+- **C4 avec R3** forme un **filtre actif**
+- **C2 avec R6** forme le **filtre de sortie**
+- **C3** filtre le bruit d'alimentation 
 
 Nous allons maintenant tester ce circuit à l'aide du logiciel d'électronique analogique LTSpice.
 
 ### 3.2. Test circuit électrique sur LTSpice
-
 
 
 ### 3.3. Réalisation d'un PCB (KiCad)
